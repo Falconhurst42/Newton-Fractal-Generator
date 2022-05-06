@@ -9,7 +9,10 @@ settings.tol = 1e-6;
 
 f = @(x) [x.^5 + x.^2 - x + 1;
           5.*x.^4 + 2.*x - 1];
+#f = @(x) [x.^3 - 1;
+#          3.*x.^2];
 
+          
 start = time();
 printf("Iterating...\n");
 out = iterate(f, settings);
