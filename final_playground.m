@@ -15,9 +15,9 @@ f = @(x) [x.^5 + x.^2 - x + 1;
           
 start = time();
 printf("Iterating...\n");
-out = iterate(f, settings);
+[out, roots] = iterate(f, settings);
 printf("comp -> hsl...\n");
-hsl = comp2hsl(out);
+hsl = comp2hsl(out, roots, settings);
 printf("hsl -> rgb...\n");
 rgb = hsl2rgb(hsl);
 printf("exporting...\n");

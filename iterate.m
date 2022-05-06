@@ -1,4 +1,4 @@
-function out = iterate(f, settings)
+function [out, roots] = iterate(f, settings)
   % range.realmin/max, range.imagmin/max, range.resolution
   
   v = make_v(settings);
@@ -28,4 +28,7 @@ function out = iterate(f, settings)
   endwhile
   
   out = reshape(v, [settings.resolution, settings.resolution]);
+  digits = max([(settings.realmax - settings.realmin), abs(settings.imagmax - settings.imagmin)]);
+  digits = abs(ceil(log10(digits/100)));
+  roots = unique(round(out .* (10^digits))/(10^digits));
 end
