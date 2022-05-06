@@ -1,0 +1,22 @@
+clear all
+
+settings.realmin = -2;
+settings.realmax = 2;
+settings.imagmin = -2;
+settings.imagmax = 2;
+settings.resolution = 2000;
+settings.tol = 1e-6;
+
+f = @(x) [x.^5 + x.^2 - x + 1;
+          5.*x.^4 + 2.*x - 1];
+
+start = time();
+printf("Iterating...\n");
+out = iterate(f, settings);
+printf("comp -> hsl...\n");
+hsl = comp2hsl(out);
+printf("hsl -> rgb...\n");
+rgb = hsl2rgb(hsl);
+printf("exporting...\n");
+imwrite(rgb, "test.png");
+printf("Completed in %d seconds\n", time() - start);
