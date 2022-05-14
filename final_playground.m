@@ -4,8 +4,9 @@ settings.realmin = -2;
 settings.realmax = 2;
 settings.imagmin = -2;
 settings.imagmax = 2;
-settings.resolution = 2000;
+settings.resolution = 150;
 settings.tol = 1e-6;
+
 
 f = @(x) [x.^5 + x.^2 - x + 1;
           5.*x.^4 + 2.*x - 1];

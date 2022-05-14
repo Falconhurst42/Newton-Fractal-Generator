@@ -19,21 +19,27 @@ function hsl = comp2hsl(compvec, roots, settings)
   lvec(invalid) = 0;
   
   # insert roots
+  n = settings.resolution;
   conv = @(x) [round(settings.resolution*(real(x) - settings.realmin)/(settings.realmax - settings.realmin)); 
     round(settings.resolution*(imag(x) - settings.imagmin)/(settings.imagmax - settings.imagmin))];
-  root_coords = reshape(conv(roots), [max(size(roots)), 2])
-  border = round(settings.resolution/100);
+  root_coords = reshape(conv(roots), [max(size(roots)), 2]);
+  border = ceil(n/100);
   pixel_coords = [];
+  diags = (-border:border) .* ones(2*border+1,1);
+  trans = cat(2, reshape(diags', [(2*border+1)^2,1]), reshape(diags, [(2*border+1)^2,1]));
+  filt = sqrt(trans(:,1).^2 .+ trans(:,2).^2) < n/100;
+  trans = trans(filt,:);
   
-  for x_offset = -border:border
-    for y_offset = -border:border
-      coords = root_coords + [x_offset, y_offset];
-      pixel_coords = [pixel_coords; coords];
-    endfor
+  t = [];
+  for i = 1:length(root_coords)
+    t = [t; (root_coords(i,:) .+ trans)];
   endfor
   
-  for i = 1:max(size(pixel_coords))
-    lvec(pixel_coords(i, 2), pixel_coords(i, 1)) = 1;
+  # filter out out-of-bounds points
+  t = t(t(:,1) >= 1 & t(:,1) <= n & t(:,2) >= 1 & t(:,2) <= n,:);
+  
+  for i = 1:length(t)
+    lvec(t(i, 2), t(i, 1)) = 1;
   endfor
   
   hsl = cat(3, hvec, svec, lvec);

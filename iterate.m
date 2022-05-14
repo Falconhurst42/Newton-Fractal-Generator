@@ -17,7 +17,7 @@ function [out, roots] = iterate(f, settings)
     #reshape(v, [settings.resolution, settings.resolution])
     
     # update iterating
-    iterating(iterating) = fv(1,:) > settings.tol;
+    iterating(iterating) = abs(fv(1,:)) > settings.tol;
     #reshape(iterating, [settings.resolution, settings.resolution])
     # check for completion
     if max(iterating) == 0
@@ -29,6 +29,6 @@ function [out, roots] = iterate(f, settings)
   
   out = reshape(v, [settings.resolution, settings.resolution]);
   digits = max([(settings.realmax - settings.realmin), abs(settings.imagmax - settings.imagmin)]);
-  digits = abs(ceil(log10(digits/100)));
+  digits = abs(ceil(log10(digits/100))) + 1;
   roots = unique(round(out .* (10^digits))/(10^digits));
 end
