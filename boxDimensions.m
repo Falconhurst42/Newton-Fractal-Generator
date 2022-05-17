@@ -37,7 +37,6 @@ function dim = boxDimensions(out)
         end
       end
     end
-	@@ -36,9 +42,11 @@
     info_arr = [info_arr; border_box_count, box_dim^2];
   end
 
