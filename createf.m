@@ -1,5 +1,5 @@
 #Creates f(x}, f'(x) pairs using secant method using matrix algebra since it is faster than for loops
 function pair_f = createf(f)
   h = 1e-10; #tolerance for secant method
-  pair_f = @(x) [f(x); secant(f, x, h)];
+  pair_f = @(x) [f(x); threePtCenterDiff(f, x, h)];
 end

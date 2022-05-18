@@ -4,8 +4,8 @@
 # Output:  v - a vector of n^2 complex numbers
 function v = make_v(settings)
   # creating initial matrices for real and imaginary numbers
-  real = linspace(range.realmin, range.realmax, range.resolution) .* ones(range.resolution);
-  imag = linspace(range.imagmin, range.imagmax, range.resolution) .* ones(range.resolution);
+  real = linspace(settings.realmin, settings.realmax, settings.resolution) .* ones(settings.resolution);
+  imag = linspace(settings.imagmin, settings.imagmax, settings.resolution) .* ones(settings.resolution);
   
   # adding together to create a matrix of complex numbers
   mat = real + i*imag';

@@ -7,6 +7,7 @@ settings.realmax = 3;
 settings.imagmin = -3;
 settings.imagmax = 3;
 settings.resolution = 2000;
+settings.tol = 1e-8;
 
 
 ### Function that will be ran through Newtons method
@@ -17,10 +18,10 @@ f = @(x) x.^3 - 1;
 #f = @(x) atan(x).^3-0.1.*x.^3; # lightness artifacts from comp2hsl
 #f = @(x) asin(mod(real(x)-1,2)-1).^2 + 0.2.*x.^2-0.5; 
 
-# rework into new_f(x) = [f(x);f'(x)] using secant method
+# rework into new_f(x) = [f(x);f'(x)] using 3pt center difference method
 f = createf(f);
 
-### Here be explicit [f; f'] pairs without secant method
+### Here be explicit [f; f'] pairs without 3pt center difference method
 #f = @(x) [x.^5 + x.^2 - x + 1;
 #          5.*x.^4 + 2.*x - 1];
 #f = @(x) [x.^3 - 1;
