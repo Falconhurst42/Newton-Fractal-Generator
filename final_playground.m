@@ -26,10 +26,10 @@ settings.roots = logical(0);
 f = @(x) x.^8 + x.^6 + (2+3i).*x.^4 + (3+5i)*x.^2 - 1;
 #f = @(x) x.^4 + 3i*x.^3 - 2*x.^2 + 3*x - 5;
 
-# rework into new_f(x) = [f(x);f'(x)] using numerical differentiation
+# rework into new_f(x) = [f(x);f'(x)] using 3pt center difference method
 f = createf(f);
 
-### Here be explicit [f; f'] pairs without numerical differentiation
+### Here be explicit [f; f'] pairs without 3pt center difference method
 #f = @(x) [x.^5 + x.^2 - x + 1;
 #          5.*x.^4 + 2.*x - 1];
 #f = @(x) [x.^3 - 1;
